@@ -1,0 +1,6 @@
+[submodule "landbell-laravel"]
+	path = landbell-laravel
+	url = git@github.com:DouglasBSilva/landbell-laravel.git
+[submodule "landbell-vuejs"]
+	path = landbell-vuejs
+	url = git@github.com:DouglasBSilva/landbell-vuejs.git
