@@ -1,5 +1,27 @@
 version: "3.7"
 services:
+  front:
+    build:
+      context: ./landbell-vuejs/
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+    container_name: vuejs-landbell
+    volumes:
+      - ./landbell-vuejs/:/usr/src/app
+      - /usr/src/app/node_modules
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: homestead
   api:
     build:
       args:
@@ -27,25 +49,3 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - api
-  front:
-    build:
-      context: ./landbell-vuejs/
-      dockerfile: ./Dockerfile
-    ports:
-      - "80:80"
-    container_name: vuejs-landbell
-    volumes:
-      - ./landbell-vuejs/:/usr/src/app
-      - /usr/src/app/node_modules
-  mysql:
-    container_name: mysql
-    image: mysql:8.0
-    ports:
-      - 3306:3306
-    volumes:
-      - ./mysql-data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: homestead
