@@ -13,6 +13,9 @@ services:
     working_dir: /var/www/
     volumes:
       - ./landbell-laravel:/var/www
+      - ./landbell-laravel/.env.example:/var/www/.env
+    depends_on:
+      - mysql
   nginx:
     image: nginx:alpine
     container_name: nginx
